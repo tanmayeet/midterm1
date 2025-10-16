@@ -1,5 +1,5 @@
-#include <iostream>
-using namespace std;
+#include <iostream>   //includes the standard input/output stream library
+using namespace std;  // includes
 
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 
@@ -9,9 +9,9 @@ const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 class DoublyLinkedList {
  private:
   struct Node {
-    int data;
-    Node* prev;  //
-    Node* next;
+    int data;    // Stores integer value of the node
+    Node* prev;  // Pointer to the previous node in the list
+    Node* next;  // Pointer to the next node in the list
     Node(int val, Node* p = nullptr, Node* n = nullptr) {
       data = val;
       prev = p;
@@ -170,7 +170,8 @@ class DoublyLinkedList {
       head = tail = nullptr;
     delete temp;
   }
-  // Destructor used to deallocate memory used by the linked list
+  // Destructor used to deallocate the dynamically-allocated memory used by the
+  // linked list
   ~DoublyLinkedList() {
     while (head) {        // while head is not null
       Node* temp = head;  // we store the current node in temp
