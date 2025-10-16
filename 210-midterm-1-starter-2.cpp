@@ -192,18 +192,27 @@ class DoublyLinkedList {
     }
     cout << endl;
   }
-
+  // print_reverse() displays the list from tail to head
+  // arguments: none
+  // returns: nothing
   void print_reverse() {
-    Node* current = tail;
-    if (!current) {
-      cout << "List is empty." << endl;
-      return;
+    Node* current = tail;  // sets the pointer current to the node's tail
+    if (!current) {        // if current is null aka the list is empty
+      cout
+          << "List is empty."
+          << endl;  // output that the list is empty and end the line after that
+      return;  // stops the print_reverse() from running further and returns
     }
-    while (current) {
-      cout << current->data << " ";
-      current = current->prev;
+    while (current) {  // then if current is not null and the list does exist
+      cout << current->data
+           << " ";  // output whatever data that current is pointing to
+      current =
+          current
+              ->prev;  // then set the pointer to the previous node in the list
     }
-    cout << endl;
+    cout << endl;  // once the loop is done meaning we've reached the beginning
+                   // of the loop and there is nothing more to output, end the
+                   // line to signify the end of the while loop
   }
 };
 
