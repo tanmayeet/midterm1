@@ -3,11 +3,14 @@ using namespace std;
 
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 
+// DoublyLinkedList() intializes an empty doubly linked list
+// arguments: none
+// returns: nothing
 class DoublyLinkedList {
  private:
   struct Node {
     int data;
-    Node* prev;
+    Node* prev;  //
     Node* next;
     Node(int val, Node* p = nullptr, Node* n = nullptr) {
       data = val;
@@ -112,7 +115,9 @@ class DoublyLinkedList {
     temp->next->prev = tempPrev;
     delete temp;
   }
-
+  // push_back() appends an element to the list's tail
+  // arguments: int v
+  // returns: nothing
   void push_back(int v) {
     Node* newNode = new Node(v);
     if (!tail)
@@ -170,21 +175,21 @@ class DoublyLinkedList {
     while (head) {        // while head is not null
       Node* temp = head;  // we store the current node in temp
       head = head->next;  // then we set head to the next node
-      delete temp;  // then we delete temp, which was the previous head's node
+      delete temp;        // delete the previous head's node
     }
-    //
-    void print() {
-      Node* current = head;
-      if (!current) {
-        cout << "List is empty." << endl;
-        return;
-      }
-      while (current) {
-        cout << current->data << " ";
-        current = current->next;
-      }
-      cout << endl;
+  }
+  //
+  void print() {
+    Node* current = head;
+    if (!current) {
+      cout << "List is empty." << endl;
+      return;
     }
+    while (current) {
+      cout << current->data << " ";
+      current = current->next;
+    }
+    cout << endl;
   }
 
   void print_reverse() {
@@ -199,13 +204,10 @@ class DoublyLinkedList {
     }
     cout << endl;
   }
-}
-}
-;
+};
 
 int main() {
   cout << MIN_NR + MIN_LS + MAX_NR +
               MAX_LS;  // dummy statement to avoid compiler warning
-
   return 0;
 }
