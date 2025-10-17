@@ -1,6 +1,7 @@
 #include <iostream>   //includes the standard input/output stream library
-using namespace std;  // includes
+using namespace std;  // allows use of standard library names
 
+// constants used for list generation/validation
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 
 // DoublyLinkedList() intializes an empty doubly linked list
@@ -12,6 +13,8 @@ class DoublyLinkedList {
     int data;    // Stores integer value of the node
     Node* prev;  // Pointer to the previous node in the list
     Node* next;  // Pointer to the next node in the list
+
+    // Constructor that initializes nod with valu and prev/next pointers
     Node(int val, Node* p = nullptr, Node* n = nullptr) {
       data = val;
       prev = p;
@@ -19,67 +22,81 @@ class DoublyLinkedList {
     }
   };
 
-  Node* head;
-  Node* tail;
+  Node* head;  // points to the first node in the list
+  Node* tail;  // points to the last node in the list
 
  public:
+  // constructor initializes an empty list
   DoublyLinkedList() {
     head = nullptr;
     tail = nullptr;
   }
 
+  // insert_after() inserts a node with the given value after the specified
+  // position
+  // arguments: int value, int position
+  // returns: nothing
   void insert_after(int value, int position) {
-    if (position < 0) {
+    if (position < 0) {  // checks if the position is out of bounds
       cout << "Position must be >= 0." << endl;
       return;
     }
 
-    Node* newNode = new Node(value);
-    if (!head) {
-      head = tail = newNode;
+    Node* newNode = new Node(value);  // creates a new node
+    if (!head) {  // checks if the list is empty aka head does not point to
+                  // anything and is null
+      head = tail = newNode;  // then set head and tail to th new node
       return;
     }
 
-    Node* temp = head;
-    for (int i = 0; i < position && temp; ++i) temp = temp->next;
+    Node* temp = head;  // temporary node pointer to head
+    for (int i = 0; i < position && temp;
+         ++i)  // traverses the list between the position and the temp
+      temp = temp->next;
 
-    if (!temp) {
+    if (!temp) {  // If position
       cout << "Position exceeds list size. Node not inserted.\n";
       delete newNode;
       return;
     }
 
-    newNode->next = temp->next;
-    newNode->prev = temp;
-    if (temp->next)
-      temp->next->prev = newNode;
+    // link the new nod into the list
+    newNode->next = temp->next;    // point newmode to temp's next
+    newNode->prev = temp;          // point newnode back to temp
+    if (temp->next)                // if temp isn't the last node
+      temp->next->prev = newNode;  // fix the back link of the next node
     else
-      tail = newNode;
-    temp->next = newNode;
+      tail = newNode;      // if temp was the last node, update tail
+    temp->next = newNode;  // link temp forward to newnode
   }
 
   void delete_val(int value) {
-    if (!head) return;
+    if (!head) return;  // if list is empty, exit
 
-    Node* temp = head;
+    Node* temp = head;  // start from the head
 
+    // look for the node with the matching valuee
     while (temp && temp->data != value) temp = temp->next;
 
-    if (!temp) return;
+    if (!temp) return;  // value not found
 
+    // fix the previous node's next pointer
     if (temp->prev)
       temp->prev->next = temp->next;
     else
       head = temp->next;
 
+    // fix the next node's prev pointer
     if (temp->next)
       temp->next->prev = temp->prev;
     else
-      tail = temp->prev;
+      tail = temp->prev;  // if we're deleting the tail, move tail back
 
-    delete temp;
+    delete temp;  // free the memory for the deleted node
   }
-
+  // delete_pos() deletes the node at the specified position
+  // arguments: int p
+  // returns: nothing
   void delete_pos(int pos) {
     if (!head) {
       cout << "List is empty." << endl;
@@ -129,6 +146,9 @@ class DoublyLinkedList {
     }
   }
 
+  // push_front() adds a node with the given value to the front of the list
+  // arguments: int value
+  // returns: nothing
   void push_front(int v) {
     Node* newNode = new Node(v);
     if (!head)
@@ -141,7 +161,7 @@ class DoublyLinkedList {
   }
 
   void pop_front() {
-    if (!head) {
+    if (!head) {  // if head is null aka the list is empty
       cout << "List is empty." << endl;
       return;
     }
@@ -157,7 +177,7 @@ class DoublyLinkedList {
   }
 
   void pop_back() {
-    if (!tail) {
+    if (!tail) {  // if tail is null aka the list is empty
       cout << "List is empty." << endl;
       return;
     }
@@ -179,7 +199,10 @@ class DoublyLinkedList {
       delete temp;        // delete the previous head's node
     }
   }
-  //
+
+  // print() displays the list from head to tail
+  // arguments: none
+  // returns: nothing
   void print() {
     Node* current = head;
     if (!current) {
