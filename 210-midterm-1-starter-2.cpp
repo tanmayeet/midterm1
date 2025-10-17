@@ -214,6 +214,28 @@ class DoublyLinkedList {
                    // of the loop and there is nothing more to output, end the
                    // line to signify the end of the while loop
   }
+
+  void every_other_element() {
+    Node* current = head;
+    bool print = true;
+
+    if (!current) {  // if current is null aka the list is empty
+      cout
+          << "List is empty."
+          << endl;  // output that the list is empty and end the line after that
+      return;  // stops the print_reverse() from running further and returns
+    }
+
+    while (current) {
+      if (print) {
+        cout << current->data << " ";
+      }
+      current = current->next;
+      print = !print;
+    }
+
+    cout << endl;
+  }
 };
 
 int main() {
