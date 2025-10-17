@@ -215,9 +215,12 @@ class DoublyLinkedList {
                    // line to signify the end of the while loop
   }
 
+  // every_other_element() outputs the every other data structure in the list
+  // starting with the first element (outputs first, skips second, outputs
+  // third, etc.) arguments: none returns: nothing
   void every_other_element() {
-    Node* current = head;
-    bool print = true;
+    Node* current = head;  // set a pointer called current to the node's head
+    bool print = true;     // set a bool for when to print and not print
 
     if (!current) {  // if current is null aka the list is empty
       cout
@@ -226,20 +229,34 @@ class DoublyLinkedList {
       return;  // stops the print_reverse() from running further and returns
     }
 
-    while (current) {
-      if (print) {
-        cout << current->data << " ";
+    while (current) {                  // while current points to a node's head
+      if (print) {                     // if print is true
+        cout << current->data << " ";  // output the current's data
       }
-      current = current->next;
-      print = !print;
+      current = current->next;  // set current to the next node
+      print = !print;  // switch whatever prints current condition is, this
+                       // allows us to alternate between printing and not
+                       // printing for each element
     }
-
     cout << endl;
   }
 };
 
 int main() {
-  cout << MIN_NR + MIN_LS + MAX_NR +
-              MAX_LS;  // dummy statement to avoid compiler warning
+  // cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid
+  // compiler warning
+
+  DoublyLinkedList list;
+
+  list.push_back(1);
+  list.push_back(2);
+  list.push_back(3);
+  list.push_back(4);
+  list.push_back(5);
+
+  list.print();
+
+  list.every_other_element();
+
   return 0;
 }
